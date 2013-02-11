@@ -1,0 +1,344 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<!--
+ This template is for a basic map using Mapbox.
+ 
+ This example uses Mapbox.js library.  Using the Leaflet
+ library may have features that are needed.
+-->
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>MinnPost Interactive Project</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
+  <link rel="shortcut icon" href="http://www.minnpost.com//sites/default/themes/siteskin/favicon.ico" type="image/x-icon" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+
+
+  <!--
+    The area before the START: Embeddable is used to make the
+    project act as much like the MinnPost site as possible
+    to ensure best quality and ease of local development.
+    
+    The following links are to cached collections of
+    CSS and JS and will change when the cache is cleared on
+    the site.
+    
+    So, if your links are NOT MinnPost red, then you'll probably
+    have to update this.
+  -->
+  
+  <link type="text/css" rel="stylesheet" media="all" href="http://www.minnpost.com/sites/default/files/css/css_cc2732a55db9703697ac738883d915c9.css" />
+<link type="text/css" rel="stylesheet" media="screen" href="http://www.minnpost.com/sites/default/files/css/css_b26ad2d81bc74f1246e9c9a4c45ecdea.css" />
+<link type="text/css" rel="stylesheet" media="print" href="http://www.minnpost.com/sites/default/files/css/css_cd72d16d00ebb27825710d934e28fbe8.css" />
+  <!--[if IE]>
+    <link rel="stylesheet" href="http://www.minnpost.com/sites/default/themes/derma/inc/css/ie.css?n" type="text/css">
+  <![endif]-->
+    
+</head>
+<body class="not-front logged-in page-node node-type-article one-sidebar sidebar-right admin-nw admin-vertical admin-df  section-data section-data-id-2012 section-data-id-2012-id-05 section-data-id-2012-id-05-how-we-built-legislative-bill-explorer one-sidebar sidebar-right">
+<div class="outside-embeddable-container">
+
+
+
+  <!-- 
+    START: Embeddable
+    
+    This is where you start copying to embed into the
+    content.  For full width articles, keep these classes
+    on the following div (this ensures the correct
+    font sizes).  If used in a regular article, remove
+    the classes.
+    
+    For references, the classes are:
+    node-body fieldlayout node-field-body
+  -->
+  <div class="node-body fieldlayout node-field-body">
+  
+    <!--
+      Include any library or external CSS files below.
+    -->
+    <style type="text/css">
+      @import url('http://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.css');
+    </style>
+    
+    
+    <!--
+      Include styles that are specific to your project.
+      Do try to be specific as not to screw up styles
+      on the site.
+    -->
+    <style type="text/css">
+      .interactive-container  {
+        max-width: 960px;
+        margin: 0 auto;
+        padding-top: 1em;
+      }
+      .interactive-container .clear {
+        clear: both;
+      }
+      .interactive-container .js-dependent,
+      .interactive-container .hidden {
+        display: none;
+      }
+      .interactive-container .footnote {
+        font-size: .75em;
+        font-style: italic;
+        color: #414141;
+        margin-top: 3em;
+        border-top: 1px solid #BCBCBC;
+        padding-top: 1em;
+      }
+      .interactive-container .loading-general {
+        width: 100%;
+        text-align: center;
+        padding: 2em 2em;
+        color: #ABABAB;
+        vertical-align: middle;
+        height: 100%;
+        line-height: 100%;
+      }
+      .interactive-container .loading-general span {
+        padding: 10px 5px 10px 40px;
+        background: transparent url('https://s3.amazonaws.com/data.minnpost/projects/2012-mn-election-results/images/ajax-loader.gif') center left no-repeat;
+        vertical-align: middle;
+        height: 100%;
+        line-height: 100%;
+      }
+      
+      .interactive-container .number {
+        font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+      }
+      
+      .interactive-container .interactive-map {
+        width: 100%;
+        height: 500px;
+        margin-bottom: 1em;
+      }
+      
+      .interactive-container .interactive-map .map-legends,
+      .interactive-container .interactive-map .map-tooltip,
+      .interactive-container .interactive-map .map-fullscreen,
+      .interactive-container .interactive-map .zoomer {
+        background-color: #FFFFFF;
+        background-color: rgba(255, 255, 255, 0.85);
+      }
+      
+      /**
+       * Begin custom styles.
+       */
+      
+      /**
+       * Responsive creen size styles
+       */
+      @media screen and (max-width: 960px) {
+      }
+    </style>
+    
+    <!--
+      The following are styles specific to:
+        Less than or equal to IE 8,
+        Less than or equal to IE 7
+    -->
+    
+    <!--[if lte IE 8]>
+      <style type="text/css">
+      </style>
+    <![endif]-->
+    
+    <!--[if lte IE 7]>
+      <style type="text/css">
+      </style>
+    <![endif]-->
+    
+
+
+    <!--
+      This is the HTML that will be output.  This
+      container ensures that your container acts
+      the MinnPost site as much as possible.
+      
+      Change the ID so that selectors will be specific
+      to your project.
+    -->
+    <div class="interactive-container" id="minnpost-project-name">
+      <noscript>
+        <p>This application requires Javascript which is used to make your web browser more interactive.  If this message does not go away, please consider enabling Javascript.  Here are <a href="http://www.enable-javascript.com/" target="_blank">instructions on how to enable JavaScript in your web browser</a>.</p>
+      </noscript>
+      
+      <div class="base-container">
+        <!--
+          This is where your main HTML should go.
+        -->
+        
+        <!--
+          Do ensure unique map id's so that multiple
+          maps can be embedded in the same page if needed.
+        -->
+
+        <div class="interactive-map" id="interactive-map-cross-subsidy"></div>
+      </div>
+      
+      <div class="footnote">
+        <p>Link to specific data sources.  Use as specific URL as you can and use the _blank target so that the link open in a new window. <a href="http://google.com" target="_blank">Google</a>.  Code, techniques, and data on <a href="https://github.com/MinnPost" target="_blank">Github</a>.</p>
+      </div>
+    </div>
+    
+    
+    <!--
+      The following are Mustache templates that can be
+      used in MapBox templates (as Mustache is built
+      into the MapBox.js).
+      
+      See: https://github.com/janl/mustache.js
+    -->
+    <script id="template-map-tooltip" type="text/template">
+      <div class="map-tooltip-container number">
+        Zip code: {{ ZCTA5CE10 }}
+      </div>
+    </script>
+    
+    
+    <!--
+      The following are templates that will be used
+      through Javascript.  They should be written in
+      Underscore.js templating markup.
+      
+      See: http://underscorejs.org/#template
+    -->
+    <script id="template-loading" type="text/template">
+      <div class="loading-general-container">
+        <div class="loading-general"><span>Loading...</span></div>
+      </div>
+    </script>
+    
+    <script id="template-map-legend" type="text/template">
+      <div class="map-legend-container number">
+        Example Legend
+      </div>
+    </script>
+    
+
+
+    <!-- 
+      Include Javascript libraries here.
+      
+      jQuery 1.3.2 is included to best mimic the MinnPost site.
+      Unfortunately we don't have much control over the jQuery version
+      or anyway to keep it contained.  This means that we use a
+      version of jQuery that has been renamed to jQueryCustom.
+      It's annoying but ensures that there are no JS errors on the
+      page that can cause all types of different problems,
+      while being able to use a newer version of jQuery.
+      
+      See: https://github.com/MinnPost/jquery-custom
+      
+      JS and other relevant libraries are hosted on our
+      AWS S3 account.  This ensures we do not have to
+      embed them or otherwise manage them on the MinnPost
+      site which would be a pain.  We can also leverage
+      using the same source across projects.
+      
+      You are welcome to use hosted/CDN versions of
+      libraries, but do ensure you are using a specific
+      version.  DO NOT use the latest, or latest-stable,
+      or development versions of hosted libraries
+      as they are subject to change and will eventutally
+      break, creating more work for us.
+    -->
+    <script type="text/javascript">
+      window.jQuery || document.write('<script type="text/javascript" src="https://s3.amazonaws.com/data.minnpost/js/jquery-1.3.2/jquery-1.3.2.min.js"><\/script>')
+    </script>
+    <script type="text/javascript" src="https://s3.amazonaws.com/data.minnpost/js/jquery-custom-master-20120606/jquery-1.7.2.custom.min.js"></script>
+    <script type="text/javascript" src="https://s3.amazonaws.com/data.minnpost/js/underscore-1.4.4/underscore-min.js"></script>
+    
+    <!--
+      Note using CDN hosted library but with specific version.
+    -->
+    <script type="text/javascript" src="http://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.js"></script>
+
+
+
+    <!--
+      Custom Javascript should go here.  It is
+      important to use jQueryCustom in this closure
+      way so that you are not using the original
+      jQuery as $.
+      
+      Please follow the JS coding guidelines that
+      can be found here:
+      https://github.com/MinnPost/javascript
+    -->
+    <script type="text/javascript">
+      jQueryCustom.noConflict();
+
+      (function($, w, undefined) {
+        // Document is fully loaded
+        $(document).ready(function() {
+          // Load up templates markup.  We do not compile some of them
+          // because Mapbox will handle it
+          var templates = {
+            loading: $('#template-loading').html(),
+            tooltip: $('#template-map-tooltip').html(),
+            legend: $('#template-map-legend').html()
+          };
+          var compiledTemplates = {
+            loading: _.template(templates.loading),
+            legend: _.template(templates.legend)
+          };
+          
+          // Function to change template in tilejson
+          var switchTileJSONTemplate = function(tilejson, template, type) {
+            type = type || 'teaser';
+            var re = new RegExp('({{#__' + type + '__}})(.*)({{\/__' + type + '__}})', 'm');
+            tilejson.template = tilejson.template.replace(re, '$1' + template + '$3');
+            return tilejson;
+          };
+        
+          
+          // Interaction with custom template for tooltips
+          var customTooltipMap = mapbox.map('interactive-map-cross-subsidy')
+            .addLayer(mapbox.layer().id('minnpost.map-fz4kjgia', function(layer) {
+              var tj = layer._tilejson;
+              
+              // Use the tilejson layer data to center map.  Not sure if
+              // this is the most efficient way.
+              customTooltipMap.zoom(tj.center[2]).center({ lat: tj.center[1], lon: tj.center[0] });
+              
+              // Use custom template instead.  Use the console statement to
+              // determine what variables are in available in the template
+              // console.log(tj.template);
+              tj = switchTileJSONTemplate(tj, templates.tooltip);
+              
+              // Add interaction from new tilejson
+              customTooltipMap.interaction.tilejson(tj).auto();
+            }));
+            
+            // Add UI parts
+            customTooltipMap.ui.zoomer.add();
+            customTooltipMap.ui.zoombox.add();
+            customTooltipMap.ui.fullscreen.add();
+            customTooltipMap.setZoomRange(3, 12);
+            //customTooltipMap.ui.hash.add();
+            customTooltipMap.ui.attribution.add()
+              .content('<a href="http://mapbox.com/about/maps">Terms &amp; Feedback</a>');
+            
+            // Add in legend
+            customTooltipMap.ui.legend.add().content(compiledTemplates.legend({ }));
+        });
+      })(jQueryCustom, window);
+    </script>
+  </div>
+  <!--
+    END: Embeddable
+  
+    Stop copying.
+  -->
+
+
+
+</div>
+</body>
+</html>

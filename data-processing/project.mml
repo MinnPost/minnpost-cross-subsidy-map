@@ -1,0 +1,51 @@
+{
+  "bounds": [
+    -97.6026,
+    43.3652,
+    -89.4507,
+    49.4753
+  ],
+  "center": [
+    -94.3506,
+    46.271,
+    6
+  ],
+  "format": "png",
+  "interactivity": {
+    "layer": "xsub",
+    "template_teaser": "{{{SDNAME}}}: {{{readablepc}}}% <br />\n<b>2004:</b> {{{perwadm04}}}<br />\n<b>2011:</b> {{{perwadm11}}}",
+    "fields": [
+      "SDNAME",
+      "readablepc",
+      "perwadm04",
+      "perwadm11"
+    ]
+  },
+  "minzoom": 3,
+  "maxzoom": 12,
+  "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+  "Stylesheet": [
+    "style.mss"
+  ],
+  "Layer": [
+    {
+      "geometry": "polygon",
+      "id": "xsub",
+      "class": "xsub",
+      "Datasource": {
+        "file": "/Users/tomnehil/Documents/Shapefiles/04-vs-11-sxub/04-vs-11-xsub.shp",
+        "id": "xsub",
+        "project": "04v11-xsubsidy",
+        "srs": null
+      },
+      "srs-name": "autodetect",
+      "srs": "",
+      "name": "xsub"
+    }
+  ],
+  "name": "Cross-subsidy comparison: 2004 vs 2011",
+  "description": "",
+  "attribution": "",
+  "legend": "",
+  "version": "1.0.0"
+}
