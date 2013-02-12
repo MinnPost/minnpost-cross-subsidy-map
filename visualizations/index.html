@@ -339,7 +339,11 @@
           // Function to change template in tilejson
           var switchTileJSONTemplate = function(tilejson, template, type) {
             type = type || 'teaser';
-            var re = new RegExp('({{#__' + type + '__}})(.*)({{\/__' + type + '__}})', 'm');
+            var re = new RegExp('({{#__' + type + '__}})(.*)({{\/__' + type + '__}})', 'gm');
+            
+            // Due to the fact that I cannot get the replace regex
+            // to be ok with new lines, we just remove the,
+            tilejson.template = tilejson.template.replace(/(\r\n|\n|\r)/gm, '');
             tilejson.template = tilejson.template.replace(re, '$1' + template + '$3');
             return tilejson;
           };
