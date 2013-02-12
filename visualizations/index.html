@@ -146,6 +146,24 @@
 		border: 1px solid #999;
       }
       
+      #metrozoom {
+      	position:absolute;
+		z-index:1000;
+		top:10px;left:110px;
+		font:13px/18px;
+		background: url('images/city.png') no-repeat 1px #FFF;
+		background-color: rgba(255, 255, 255, 0.85);
+		color:#3C4E5A;
+		display:block;
+		margin:0;padding:0;
+		border:1px solid #BBB;
+		min-width:10px;
+		padding:2px 9px 3px 9px;
+		-webkit-border-radius:3px;
+				border-radius:3px;
+		}
+      }
+      
       /**
        * Responsive creen size styles
        */
@@ -194,11 +212,14 @@
           maps can be embedded in the same page if needed.
         -->
 
-        <div class="interactive-map" id="interactive-map-cross-subsidy"></div>
+        <div class="interactive-map" id="interactive-map-cross-subsidy">
+        	<a href="#" id="metrozoom" title="Zoom to metro" />&nbsp;</a>
+        </div>
       </div>
       
+      
       <div class="footnote">
-        <p>Link to specific data sources.  Use as specific URL as you can and use the _blank target so that the link open in a new window. <a href="http://google.com" target="_blank">Google</a>.  Code, techniques, and data on <a href="https://github.com/MinnPost" target="_blank">Github</a>.</p>
+        <p>Link to specific data sources.  Use as specific URL as you can and use the _blank target so that the link open in a new window. <a href="http://google.com" target="_blank">Google</a>. <a href="http://thenounproject.com/noun/city/#icon-No10487">City icon</a> by <a href="http://thenounproject.com/catalarem">RémyMédard</a>, from <a href="http://thenounproject.com/">The Noun Project</a>.  Code, techniques, and data on <a href="https://github.com/MinnPost" target="_blank">Github</a>.</p>
       </div>
     </div>
     
@@ -212,7 +233,9 @@
     -->
     <script id="template-map-tooltip" type="text/template">
       <div class="map-tooltip-container number">
-        Zip code: {{ ZCTA5CE10 }}
+        <b>{{SDNAME}}:</b> {{readablepc}}%<br />
+        <b>2004:</b> {{perwadm04}}<br />
+        <b>2011:</b> {{perwadm11}}
       </div>
     </script>
     
@@ -348,6 +371,16 @@
             //customTooltipMap.ui.hash.add();
             customTooltipMap.ui.attribution.add()
               .content('<a href="http://mapbox.com/about/maps">Terms &amp; Feedback</a>');
+            
+            //zoom to metro
+            document.getElementById('metrozoom').onclick = function(e) {
+				e.preventDefault();
+				e.stopPropagation();
+				// The second argument, if true, tells the map to
+				// animate the transition to zoom level 12. The
+				// same can be done with map.center and map.centerzoom
+				customTooltipMap.centerzoom({ lat: 44.968684, lon: -93.192902 }, 9, true);
+        	};
             
             // Add in legend
             customTooltipMap.ui.legend.add().content(compiledTemplates.legend({ }));
