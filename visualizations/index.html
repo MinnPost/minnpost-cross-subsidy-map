@@ -129,6 +129,22 @@
       /**
        * Begin custom styles.
        */
+      .map-legend-container ul li {
+		font-size: 80%;
+		list-style: none;
+		margin-left: 0;
+		line-height: 18px;
+		margin-bottom: 2px;
+      }
+      .map-legend-container ul li span {
+		display: block;
+		float: left;
+		height: 16px;
+		width: 30px;
+		margin-right: 5px;
+		margin-left: 0;
+		border: 1px solid #999;
+      }
       
       /**
        * Responsive creen size styles
@@ -216,7 +232,15 @@
     
     <script id="template-map-legend" type="text/template">
       <div class="map-legend-container number">
-        Example Legend
+        Legend
+        <ul>
+        	<li><span style="background: #FFFFD4;"></span>&lt;0% Per WADM increase</li>
+        	<li><span style="background: #FEE391;"></span>0&ndash;25% Per WADM increase</li>
+        	<li><span style="background: #FEC44F;"></span>25.1&ndash;50% Per WADM increase</li>
+        	<li><span style="background: #FE9929;"></span>50.1&ndash;75% Per WADM increase</li>
+        	<li><span style="background: #D95F0E;"></span>75.1&ndash;100% Per WADM increase</li>
+        	<li><span style="background: #993404;"></span>&gt;100% Per WADM increase</li>
+        </ul>
       </div>
     </script>
     
