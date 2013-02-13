@@ -27,13 +27,12 @@ Map {
 /*#xsub [pctchg < 0] {polygon-fill:#1A9850;}
 #xsub [pctchg > 0] {polygon-fill:#990000;}*/
 
-/*#xsub [perwadm11 < 0] {polygon-fill:#FEEDDE;}
-#xsub [perwadm11 > 0] {polygon-fill:#FDD0A2;}
-#xsub [perwadm11 > 200] {polygon-fill:#FDAE6B;}
-#xsub [perwadm11 > 400] {polygon-fill:#FD8D3C;}
-#xsub [perwadm11 > 600] {polygon-fill:#F16913;}
-#xsub [perwadm11 > 800] {polygon-fill:#D94801;}
-#xsub [perwadm11 > 1000] {polygon-fill:#8C2D04;}*/
+/*#xsub [perwadm11 < 250] {polygon-fill:#FFFFD4;}
+#xsub [perwadm11 > 250] {polygon-fill:#FEE391;}
+#xsub [perwadm11 > 500] {polygon-fill:#FEC44F;}
+#xsub [perwadm11 > 750] {polygon-fill:#FE9929;}
+#xsub [perwadm11 > 1000] {polygon-fill:#D95F0E;}
+#xsub [perwadm11 > 1250] {polygon-fill:#993404;}*/
 
 /*#xsub [perwadm04 < 0] {polygon-fill:#FEEDDE;}
 #xsub [perwadm04 > 0] {polygon-fill:#FDD0A2;}
